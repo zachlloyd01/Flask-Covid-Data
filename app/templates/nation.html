@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>{{ nation }}</h1>
+
+    {% for elem in data['All'] %}
+        {%- if elem != 'country' and elem != 'sq_km_area' and elem != 'life_expectancy' and elem != 'elevation_in_meters' and elem != 'capital_city' and elem != 'iso' and elem != 'location' and elem != 'abbreviation' and elem !='lat' and elem !='long' and elem != 'updated' -%}
+            <p>{{ elem }}: {{ data['All'][elem] }}</p>
+        {% endif %}
+    {% endfor %}
+
+    <div class="row">
+        {% for elem in data %}
+            {%- if elem != 'All' and elem != 'Recovered' -%}
+                <div class="mx-auto col-xs-1" style="width: 20vw; margin: 1em;">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title"><b>{{ elem }}</b></h5>
+                            
+                            <p class="card-text">
+                                {% for state_data in data[elem] %}
+                                    {%- if state_data != 'lat' and state_data != 'long' and state_data != 'updated' -%}
+                                        {{state_data}}: {{data[elem][state_data]}} <br />
+                                    {% endif %}
+                                {% endfor %}
+                            </p>
+
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+        {% endfor %}
+    </div>
+{% endblock %}

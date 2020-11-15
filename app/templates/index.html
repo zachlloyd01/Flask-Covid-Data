@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>Data by country</h1>
+    <div class="row">
+        {% for nation in data %}
+            <div class="mx-auto col-xs-1" style="width: 20vw; margin: 1em;">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title"><b>{{ nation }}</b></h5>
+                        
+                        <p class="card-text">
+                            Total population: {{ data[nation]['All']['population']}}<br />
+                            Total cases: {{ data[nation]['All']['confirmed'] }}<br />
+                            Total deaths: {{ data[nation]['All']['deaths'] }}<br />
+                            Total recoveries: {{ data[nation]['All']['recovered'] }}
+                        </p>
+
+                        <a href='{{ "/nations/{}".format(nation) }}' class="btn btn-success">More Info</a>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}
